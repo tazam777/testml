@@ -1,0 +1,8 @@
+
+I took the following systems' related courses: 
+Computer Aided Verification, Computer Organization, Concurrent Programming, Online Convex Optimization, and Computer Security
+
+I am currently taking  Compiler Construction and Advanced Computer Architecture. 
+
+I didn't take any AI courses, but I was a teaching assistant for a machine learning course, and got the NVIDIA Natural Language Processing Certificate. 
+

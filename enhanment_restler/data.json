@@ -1,0 +1,142 @@
+[
+    {
+        "input": "@app.route('/books/<int:book_id>', methods=['PUT'])\n@swag_from('swagger.json')\ndef update_book(book_id):\n    data = request.json\n    if book_id in books:\n        books[book_id]['quantity'] = data.get('quantity', books[book_id]['quantity'])\n        return jsonify(books[book_id]), 200\n    else:\n        return jsonify({'message': 'Book not found'}), 404",
+        "output": {
+            "swagger": "2.0",
+            "info": {
+                "title": "Book Inventory API",
+                "version": "1.0",
+                "description": "API for managing a book inventory."
+            },
+            "schemes": ["http"],
+            "paths": {
+                "/books/{book_id}": {
+                    "put": {
+                        "summary": "Update book quantity",
+                        "description": "Updates the quantity of a book in the inventory.",
+                        "parameters": [
+                            {
+                                "name": "book_id",
+                                "in": "path",
+                                "required": true,
+                                "type": "integer",
+                                "description": "The ID of the book to update"
+                            },
+                            {
+                                "name": "quantity",
+                                "in": "body",
+                                "required": true,
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "quantity": {
+                                            "type": "integer",
+                                            "description": "New quantity of the book"
+                                        }
+                                    }
+                                },
+                                "description": "Object containing new quantity of the book"
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Book updated successfully",
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "author": {
+                                            "type": "string"
+                                        },
+                                        "quantity": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            },
+                            "404": {
+                                "description": "Book not found"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    {
+        "input": "@app.route('/login', methods=['POST'])\ndef login():\n    username = request.json.get('username')\n    password = request.json.get('password')\n    user = users.get(username)\n\n    if user and user['password'] == password:\n        return jsonify({\"message\": \"Login successful\", \"status\": \"success\"}), 200\n    else:\n        return jsonify({\"message\": \"Invalid credentials\", \"status\": \"error\"}), 401",
+        "output": {
+            "swagger": "2.0",
+            "info": {
+                "title": "User Authentication API",
+                "version": "1.0",
+                "description": "API for user authentication."
+            },
+            "schemes": ["http"],
+            "basePath": "/",
+            "paths": {
+                "/login": {
+                    "post": {
+                        "summary": "User login",
+                        "description": "Authenticates a user based on username and password.",
+                        "parameters": [
+                            {
+                                "name": "username",
+                                "in": "body",
+                                "required": true,
+                                "schema": {
+                                    "type": "string",
+                                    "example": "john_doe"
+                                },
+                                "description": "The username of the user"
+                            },
+                            {
+                                "name": "password",
+                                "in": "body",
+                                "required": true,
+                                "schema": {
+                                    "type": "string",
+                                    "example": "123456"
+                                },
+                                "description": "The password of the user"
+                            }
+                        ],
+                        "responses": {
+                            "200": {
+                                "description": "Login successful",
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "401": {
+                                "description": "Invalid credentials",
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+]
